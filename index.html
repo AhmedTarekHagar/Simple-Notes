@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Notes</title>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <h1 class="m-0 sticky-top bg-black py-3 align-middle text-warning text-center">Sticky Notes</h1>
+
+  <div class="container-fluid min-vh-100 vh-100">
+
+    <div class="row flex-shrink-0 h-100">
+      <div class="col-3 bg-dark py-3 px-4">
+        <form class="text-light sticky-top">
+          <div class="row gy-3">
+            <div>
+              <label class="form-label" for="title">Note title:</label>
+              <input class="form-control text-light rounded-0 bg-secondary focus-ring focus-ring-dark border-dark"
+                type="text" id="title">
+            </div>
+            <div>
+              <label class="form-label" for="type">Note type:</label>
+              <select class="form-select bg-dark text-light" id="type">
+                <option selected disabled value="">Choose Type</option>
+                <option value="text">Regular note</option>
+                <option value="list">List</option>
+              </select>
+            </div>
+            <div id="listType">
+
+            </div>
+            <div id="noteContent">
+              
+            </div>
+            <button class="btn btn-outline-light mx-auto col-md-4" id="addNote" type="button">Add Note</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-9 bg-warning-subtle py-3">
+        <input class="form-control focus-ring focus-ring-warning placeholder-glow mb-3 w-25 mx-auto" type="text"
+          id="search" placeholder="Search by title">
+        <div class="row g-4" id="notes">
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
