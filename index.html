@@ -15,10 +15,10 @@
 
   <h1 class="m-0 sticky-top bg-black py-3 align-middle text-warning text-center">Sticky Notes</h1>
 
-  <div class="container-fluid min-vh-100 vh-100">
+  <div class="container-fluid vh-100">
 
-    <div class="row flex-shrink-0 h-100">
-      <div class="col-md-3 bg-dark py-3 px-4">
+    <div class="row h-100">
+      <div class="col-md-3 bg-dark pt-3 px-4">
         <form class="text-light sticky-top">
           <div class="row gy-3">
             <div>
@@ -38,17 +38,18 @@
 
             </div>
             <div id="noteContent">
-              
+
             </div>
             <button class="btn btn-outline-light mx-auto col-md-4" id="addNote" type="button">Add Note</button>
           </div>
         </form>
       </div>
+
       <div class="col-md-9 bg-warning-subtle py-3">
-        <input class="form-control focus-ring focus-ring-warning placeholder-glow mb-3 w-25 mx-auto" type="text"
+        <input class="form-control focus-ring focus-ring-warning placeholder-glow mb-3 w-75 mx-auto" type="text"
           id="search" placeholder="Search by title">
         <div class="row g-4" id="notes">
-          
+
         </div>
       </div>
     </div>
