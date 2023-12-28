@@ -193,6 +193,4 @@ function deleteNote(index) {
 
 function updateNote(index) {
     console.log('update fired for index' + index);
-    displayNotes();
-    displayNotes();
 }
