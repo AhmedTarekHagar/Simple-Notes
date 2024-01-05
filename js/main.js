@@ -301,7 +301,6 @@ function search() {
     }
 
     if (content == ``) {
-        document.getElementById('search').classList.add('d-none');
         content = `
         <div class="col-12">
             <div class="position-relative note p-3 bg-warning text-center text-danger fs-1 fw-bold shadow-lg">
