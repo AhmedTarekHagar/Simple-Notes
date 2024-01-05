@@ -1,20 +1,19 @@
 // inputs
-
 let noteTitleInput = document.getElementById('title');
 let noteTypeInput = document.getElementById('type');
 let noteContentSection = document.getElementById('noteContent');
+let addOrUpdateButton = document.getElementById('addOrUpdateNote');
+let searchInput = document.getElementById('search');
 
 // html elements
-
 let listItem = `<input placeholder="List item" type="text" class="listItem form-control bg-dark text-light focus-ring focus-ring-dark mb-2">`
 let listItemElement = `<div id="listItemsContainer">${listItem}</div>
 <button type="button" id="addListItemButton" class="btn btn-dark d-block ms-auto"><i class="fa-regular fa-add"></i></button>`;
 
-// global elements
+// global variables
 let globalIndex;
 
 // adding event listeners to manipulate DOM
-
 noteTypeInput.addEventListener('change', function () {
     if (noteTypeInput.value == 'text') {
 
@@ -52,7 +51,7 @@ if (localStorage.getItem('notes') != null) {
 
 displayNotes();
 
-function addNote() {
+function addOrUpdateNote() {
     let note = {};
     if (noteTypeInput.value == 'text') {
         note = {
@@ -72,15 +71,21 @@ function addNote() {
             content: listItems
         }
     }
+    if (addOrUpdateButton.innerHTML == `Add Note`) {
+        notesList.push(note);
+    } else if (addOrUpdateButton.innerHTML == `Update Note`) {
+        notesList.splice(globalIndex, 1, note);
+    }
+
+
 
     document.getElementById('search').classList.remove('d-none');
-    notesList.push(note);
     addToLocalStorage();
     displayNotes();
     clearForm();
 }
 
-document.getElementById('addNote').addEventListener('click', addNote);
+addOrUpdateButton.addEventListener('click', addOrUpdateNote);
 
 function addToLocalStorage() {
     localStorage.setItem('notes', JSON.stringify(notesList));
@@ -100,8 +105,9 @@ function displayNotes() {
         if (notesList[i].type == 'text') {
             content += `
             <div class="col-md-3">
-        <div class="position-relative note p-3 bg-warning">
+        <div class="position-relative note p-3 bg-warning shadow">
           <div class="position-absolute top-0 end-0">
+            <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
             <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
             <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
           </div>
@@ -111,37 +117,39 @@ function displayNotes() {
       </div>
             `;
         } else if (notesList[i].type == 'list') {
-            if (notesList[i].numbered) {
+            if(notesList[i].numbered){
                 content += `
                 <div class="col-md-3">
-            <div class="position-relative note p-3 bg-warning">
+            <div class="position-relative note p-3 bg-warning shadow">
               <div class="position-absolute top-0 end-0">
+                <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
                 <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                 <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
               <h5 class="text-secondary">${notesList[i].title}</h5>
               <ol>`
-                for (let j = 0; j < notesList[i].content.length; j++) {
-                    content += `<li>${notesList[i].content[j]}</li>`;
-                }
-                content += `</ol>
+            for (let j = 0; j < notesList[i].content.length; j++) {
+                content += `<li>${notesList[i].content[j]}</li>`;
+            }
+            content += `</ol>
             </div>
           </div>
                 `;
-            } else {
+            }else {
                 content += `
                 <div class="col-md-3">
-            <div class="position-relative note p-3 bg-warning">
+            <div class="position-relative note p-3 bg-warning shadow">
               <div class="position-absolute top-0 end-0">
+                <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
                 <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                 <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
               <h5 class="text-secondary">${notesList[i].title}</h5>
               <ul>`
-                for (let k = 0; k < notesList[i].content.length; k++) {
-                    content += `<li>${notesList[i].content[k]}</li>`;
-                }
-                content += `</ul>
+            for (let j = 0; j < notesList[i].content.length; j++) {
+                content += `<li>${notesList[i].content[j]}</li>`;
+            }
+            content += `</ul>
             </div>
           </div>
                 `;
@@ -153,8 +161,8 @@ function displayNotes() {
         document.getElementById('search').classList.add('d-none');
         content = `
         <div class="col-12">
-            <div class="position-relative note p-3 bg-warning text-center text-danger fs-1 fw-bold">
-              No notes
+            <div class="position-relative note p-3 bg-warning text-center text-danger fs-1 fw-bold shadow-lg">
+              No Notes Added
             </div>
           </div>
         `;
@@ -162,35 +170,150 @@ function displayNotes() {
 
     document.getElementById('notes').innerHTML = content;
 
-    addEventListenersToDeleteAndUpdateButtons();
+    addEventListenersToDeleteAndUpdateAndCopyButtons();
 }
 
-
-function addEventListenersToDeleteAndUpdateButtons() {
+function addEventListenersToDeleteAndUpdateAndCopyButtons() {
     let updateButtons = document.querySelectorAll('.updateButton');
     updateButtons.forEach((button, index) => {
-        button.addEventListener('click', function (event) {
+        button.addEventListener('click', function () {
             updateNote(index);
         });
     });
 
     let deleteButtons = document.querySelectorAll('.deleteButton');
     deleteButtons.forEach((button, index) => {
-        button.addEventListener('click', function (event) {
+        button.addEventListener('click', function () {
             deleteNote(index);
+        });
+    });
+
+    let copyButtons = document.querySelectorAll('.copyButton');
+    copyButtons.forEach((button, index) => {
+        button.addEventListener('click', function () {
+            copyNote(index);
         });
     });
 }
 
-
-
-
 function deleteNote(index) {
-    notesList.splice(index,1);
+    notesList.splice(index, 1);
     addToLocalStorage();
     displayNotes();
 }
 
 function updateNote(index) {
-    console.log('update fired for index' + index);
+    globalIndex = index;
+    addOrUpdateButton.innerHTML = 'Update Note';
+    addOrUpdateButton.classList.remove('btn-outline-light');
+    addOrUpdateButton.classList.add('btn-outline-warning');
+
+    noteTitleInput.value = notesList[index].title;
+    noteTypeInput.value = notesList[index].type;
+    if (notesList[index].type == 'text') {
+        document.getElementById('listType').innerHTML = ``;
+        noteContentSection.innerHTML = `
+        <label class="form-label" for="content">Note Content:</label>
+        <textarea class="form-control focus-ring focus-ring-dark" rows="5" id="content">${notesList[index].content}</textarea>`;
+    } else if (notesList[index].type == 'list') {
+        noteTypeInput.value = notesList[index].type;
+        document.getElementById('listType').innerHTML = `<div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="checkBox">
+        <label class="form-check-label" for="checkBox">Numbered?</label>
+        </div>`;
+        document.getElementById('checkBox').checked = notesList[index].numbered;
+        ListContent = ``;
+        for (i = 0; i < notesList[index].content.length; i++) {
+            ListContent += `<input value="${notesList[index].content[i]}" placeholder="List item" type="text" class="listItem form-control bg-dark text-light focus-ring focus-ring-dark mb-2">`
+        }
+        noteContentSection.innerHTML = listItemElement;
+        document.getElementById('listItemsContainer').innerHTML = ListContent;
+        document.getElementById('addListItemButton').addEventListener('click', addNewListItem);
+    }
 }
+
+function copyNote(index) {
+    notesList.splice(index, 0, notesList[index]);
+    addToLocalStorage();
+    displayNotes();
+}
+
+function search() {
+    let searchValue = searchInput.value.toLowerCase();
+    let content = ``;
+
+    for (i = 0; i < notesList.length; i++) {
+        if (notesList[i].title.toLowerCase().includes(searchValue)) {
+            if (notesList[i].type == 'text') {
+                content += `
+                <div class="col-md-3">
+            <div class="position-relative note p-3 bg-warning shadow">
+              <div class="position-absolute top-0 end-0">
+                <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+              </div>
+              <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+              <p>${notesList[i].content}</p>
+            </div>
+          </div>
+                `;
+            } else if (notesList[i].type == 'list') {
+                if(notesList[i].numbered){
+                    content += `
+                    <div class="col-md-3">
+                <div class="position-relative note p-3 bg-warning shadow">
+                  <div class="position-absolute top-0 end-0">
+                    <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                    <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                    <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+                  </div>
+                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                  <ol>`
+                for (let j = 0; j < notesList[i].content.length; j++) {
+                    content += `<li>${notesList[i].content[j]}</li>`;
+                }
+                content += `</ol>
+                </div>
+              </div>
+                    `;
+                }else{
+                    content += `
+                    <div class="col-md-3">
+                <div class="position-relative note p-3 bg-warning shadow">
+                  <div class="position-absolute top-0 end-0">
+                    <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                    <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                    <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+                  </div>
+                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                  <ul>`
+                for (let j = 0; j < notesList[i].content.length; j++) {
+                    content += `<li>${notesList[i].content[j]}</li>`;
+                }
+                content += `</ul>
+                </div>
+              </div>
+                    `;
+                }
+            }
+        }
+    }
+
+    if (content == ``) {
+        document.getElementById('search').classList.add('d-none');
+        content = `
+        <div class="col-12">
+            <div class="position-relative note p-3 bg-warning text-center text-danger fs-1 fw-bold shadow-lg">
+              No Notes Added
+            </div>
+          </div>
+        `;
+    }
+
+    document.getElementById('notes').innerHTML = content;
+
+    addEventListenersToDeleteAndUpdateAndCopyButtons();
+}
+
+searchInput.addEventListener('keyup', search);

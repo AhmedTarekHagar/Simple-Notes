@@ -1,3 +1,7 @@
 textarea {
     resize: none;
 }
+
+.listItem::placeholder {
+    color: rgba(255,255,255, .5);
+}
