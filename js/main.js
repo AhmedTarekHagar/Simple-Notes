@@ -106,10 +106,10 @@ function displayNotes() {
             content += `
             <div class="col-md-3">
         <div class="position-relative note p-3 bg-warning shadow">
-          <div class="position-absolute top-0 end-0">
-            <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
-            <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
-            <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+          <div class="position-absolute bottom-0 end-0">
+            <button title="Dublicate Note" class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+            <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+            <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
           </div>
           <h5 class="text-secondary">${notesList[i].title}</h5>
           <p>${notesList[i].content}</p>
@@ -121,10 +121,10 @@ function displayNotes() {
                 content += `
                 <div class="col-md-3">
             <div class="position-relative note p-3 bg-warning shadow">
-              <div class="position-absolute top-0 end-0">
-                <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
-                <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
-                <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+              <div class="position-absolute bottom-0 end-0">
+                <button title="Dublicate Note" class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
               <h5 class="text-secondary">${notesList[i].title}</h5>
               <ol>`
@@ -139,10 +139,10 @@ function displayNotes() {
                 content += `
                 <div class="col-md-3">
             <div class="position-relative note p-3 bg-warning shadow">
-              <div class="position-absolute top-0 end-0">
-                <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
-                <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
-                <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+              <div class="position-absolute bottom-0 end-0">
+                <button title="Dublicate Note" class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
               <h5 class="text-secondary">${notesList[i].title}</h5>
               <ul>`
@@ -248,10 +248,10 @@ function search() {
                 content += `
                 <div class="col-md-3">
             <div class="position-relative note p-3 bg-warning shadow">
-              <div class="position-absolute top-0 end-0">
-                <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
-                <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
-                <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+              <div class="position-absolute bottom-0 end-0">
+                <button title="Dublicate Note" class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
               <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
               <p>${notesList[i].content}</p>
@@ -263,10 +263,10 @@ function search() {
                     content += `
                     <div class="col-md-3">
                 <div class="position-relative note p-3 bg-warning shadow">
-                  <div class="position-absolute top-0 end-0">
-                    <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
-                    <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
-                    <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+                  <div class="position-absolute bottom-0 end-0">
+                    <button title="Dublicate Note" class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                    <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                    <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                   </div>
                   <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
                   <ol>`
@@ -281,10 +281,10 @@ function search() {
                     content += `
                     <div class="col-md-3">
                 <div class="position-relative note p-3 bg-warning shadow">
-                  <div class="position-absolute top-0 end-0">
-                    <button class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
-                    <button class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
-                    <button class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
+                  <div class="position-absolute bottom-0 end-0">
+                    <button title="Dublicate Note" class="copyButton btn text-secondary" type="button"><i class="fa-regular fa-copy"></i></button>
+                    <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
+                    <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                   </div>
                   <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
                   <ul>`
