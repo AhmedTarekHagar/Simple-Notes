@@ -47,6 +47,7 @@ let notesList = [];
 
 if (localStorage.getItem('notes') != null) {
     notesList = JSON.parse(localStorage.getItem('notes'));
+    document.getElementById('search').classList.remove('d-none');
 }
 
 displayNotes();
@@ -75,11 +76,11 @@ function addOrUpdateNote() {
         notesList.push(note);
     } else if (addOrUpdateButton.innerHTML == `Update Note`) {
         notesList.splice(globalIndex, 1, note);
+        addOrUpdateButton.innerHTML = 'Add Note';
+        addOrUpdateButton.classList.add('btn-outline-light');
+        addOrUpdateButton.classList.remove('btn-outline-warning');
     }
 
-
-
-    document.getElementById('search').classList.remove('d-none');
     addToLocalStorage();
     displayNotes();
     clearForm();
@@ -117,7 +118,7 @@ function displayNotes() {
       </div>
             `;
         } else if (notesList[i].type == 'list') {
-            if(notesList[i].numbered){
+            if (notesList[i].numbered) {
                 content += `
                 <div class="col-md-3">
             <div class="position-relative note p-3 bg-warning shadow">
@@ -128,14 +129,14 @@ function displayNotes() {
               </div>
               <h5 class="text-secondary">${notesList[i].title}</h5>
               <ol>`
-            for (let j = 0; j < notesList[i].content.length; j++) {
-                content += `<li>${notesList[i].content[j]}</li>`;
-            }
-            content += `</ol>
+                for (let j = 0; j < notesList[i].content.length; j++) {
+                    content += `<li>${notesList[i].content[j]}</li>`;
+                }
+                content += `</ol>
             </div>
           </div>
                 `;
-            }else {
+            } else {
                 content += `
                 <div class="col-md-3">
             <div class="position-relative note p-3 bg-warning shadow">
@@ -146,10 +147,10 @@ function displayNotes() {
               </div>
               <h5 class="text-secondary">${notesList[i].title}</h5>
               <ul>`
-            for (let j = 0; j < notesList[i].content.length; j++) {
-                content += `<li>${notesList[i].content[j]}</li>`;
-            }
-            content += `</ul>
+                for (let j = 0; j < notesList[i].content.length; j++) {
+                    content += `<li>${notesList[i].content[j]}</li>`;
+                }
+                content += `</ul>
             </div>
           </div>
                 `;
@@ -253,13 +254,13 @@ function search() {
                 <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                 <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
-              <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+              <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
               <p>${notesList[i].content}</p>
             </div>
           </div>
                 `;
             } else if (notesList[i].type == 'list') {
-                if(notesList[i].numbered){
+                if (notesList[i].numbered) {
                     content += `
                     <div class="col-md-3">
                 <div class="position-relative note p-3 bg-warning shadow">
@@ -268,16 +269,16 @@ function search() {
                     <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                     <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                   </div>
-                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
                   <ol>`
-                for (let j = 0; j < notesList[i].content.length; j++) {
-                    content += `<li>${notesList[i].content[j]}</li>`;
-                }
-                content += `</ol>
+                    for (let j = 0; j < notesList[i].content.length; j++) {
+                        content += `<li>${notesList[i].content[j]}</li>`;
+                    }
+                    content += `</ol>
                 </div>
               </div>
                     `;
-                }else{
+                } else {
                     content += `
                     <div class="col-md-3">
                 <div class="position-relative note p-3 bg-warning shadow">
@@ -286,12 +287,12 @@ function search() {
                     <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                     <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                   </div>
-                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue,`<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
                   <ul>`
-                for (let j = 0; j < notesList[i].content.length; j++) {
-                    content += `<li>${notesList[i].content[j]}</li>`;
-                }
-                content += `</ul>
+                    for (let j = 0; j < notesList[i].content.length; j++) {
+                        content += `<li>${notesList[i].content[j]}</li>`;
+                    }
+                    content += `</ul>
                 </div>
               </div>
                     `;
