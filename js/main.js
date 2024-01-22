@@ -47,7 +47,7 @@ let notesList = [];
 
 if (localStorage.getItem('notes') != null) {
     notesList = JSON.parse(localStorage.getItem('notes'));
-    document.getElementById('search').classList.remove('d-none');
+    searchInput.classList.remove('d-none');
 }
 
 displayNotes();
@@ -177,7 +177,6 @@ function displayNotes() {
     }
 
     if (content == ``) {
-        document.getElementById('search').classList.add('d-none');
         content = `
         <div class="col-12">
             <div class="position-relative note p-3 bg-warning text-center text-danger fs-1 fw-bold shadow-lg">
@@ -272,7 +271,7 @@ function search() {
                 <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                 <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
               </div>
-              <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+              <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark px-1 rounded">${searchValue}</span>`)}</h5>
               <p>${notesList[i].content}</p>
             </div>
           </div>
@@ -287,7 +286,7 @@ function search() {
                     <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                     <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                   </div>
-                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark px-1 rounded">${searchValue}</span>`)}</h5>
                   <ol>`
                     for (let j = 0; j < notesList[i].content.length; j++) {
                         content += `<li>${notesList[i].content[j]}</li>`;
@@ -305,7 +304,7 @@ function search() {
                     <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                     <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                   </div>
-                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                  <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark px-1 rounded">${searchValue}</span>`)}</h5>
                   <ul>`
                     for (let j = 0; j < notesList[i].content.length; j++) {
                         content += `<li>${notesList[i].content[j]}</li>`;
@@ -324,7 +323,7 @@ function search() {
                                     <button title="Edit Note" class="updateButton btn text-secondary" type="button"><i class="fa-regular fa-edit"></i></button>
                                     <button title="Delete Note" class="deleteButton btn text-danger" type="button"><i class="fa-regular fa-trash-can"></i></button>
                                 </div>
-                                <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark">${searchValue}</span>`)}</h5>
+                                <h5 class="text-secondary">${notesList[i].title.toLowerCase().replace(searchValue, `<span class = "text-light bg-dark px-1 rounded">${searchValue}</span>`)}</h5>
                                 <p class="text-uppercase text-danger fw-bold">no Content to this note</p>
                                 </div>
                             </div>
