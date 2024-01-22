@@ -258,6 +258,10 @@ function copyNote(index) {
 
 function search() {
     let searchValue = searchInput.value.toLowerCase();
+    if(searchValue == ``){
+        displayNotes();
+        return;
+    }
     let content = ``;
 
     for (i = 0; i < notesList.length; i++) {
